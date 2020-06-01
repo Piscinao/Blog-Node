@@ -11,6 +11,16 @@ const Category = require("./categories/Category");
 
 
 
+//View engine
+app.set('view engine', 'ejs');
+
+//Static
+app.use(express.static('public'));
+
+//Body parser
+app.use(bodyParser.urlencoded({extended: false}));
+app.use(bodyParser.json());
+
 
 //Database
 
@@ -23,28 +33,18 @@ connection
     console.log(msgError);
   });
 
+
+
 //Define router prefix and import controller routes
-app.use("/", categoriesController, articlesController);
+app.use("/", categoriesController);
+app.use("/", articlesController);
 
 app.get("/", (req, res) => {
-    res.render("index");
-  
+  res.render("index");
+
 });
 
-
-//View engine
-app.set('view engine', 'ejs');
-
-//Static
-app.use(express.static('public'));
-
-//Body parser
-app.use(bodyParser.urlencoded({extended: false}));
-app.use(bodyParser.json());
-
-
-
-app.listen(8080, () => {
+app.listen(8090, () => {
   console.log("Server is running!");
 });
 
