@@ -10,7 +10,7 @@
             <button id="alert">alert</button>
         </div>
         <div class="card-body">
-            <table class="table table-bordered">
+            <table id="myTable" class="table table-bordered">
               <thead>
                 <tr>
                   <th>ID</th>
@@ -55,6 +55,25 @@
 </div>
 
 <%- include ("../../partials/footer.ejs") %>
+
+<script>
+  $(document).ready(function() {
+      $('#myTable').DataTable( {
+          "language": {
+              "lengthMenu": "Mostrando MENU registros por página",
+              "zeroRecords": "Nenhum Registro Encontrado",
+              "info": "Mostrando Página _PAGE_ de _PAGES_",
+              "infoEmpty": "Nenhum registro Disponível",
+              "infoFiltered": "(filtrado de MAX registro no total)",
+              "search": "Buscar",
+                paginate: {
+                previous: 'Anterior',
+                next:     'Próxima'}
+
+          }
+      } );
+  } );
+</script>
 
 <script>
 
