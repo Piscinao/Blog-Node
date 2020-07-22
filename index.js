@@ -1,5 +1,6 @@
 const express = require("express");
 const app = express();
+const session = require("express-session");
 const connection = require("./database/database");
 const bodyParser = require("body-parser");
 
@@ -13,6 +14,13 @@ const User = require("./users/User");
 
 //View engine
 app.set('view engine', 'ejs');
+
+//sessionStore
+app.use(session({
+  secret: "secretKeySession", cookie: {maxAge: 30000},
+  resave: true,
+  saveUninitialized: true
+}));
 
 //Static
 app.use(express.static('public'));
@@ -39,6 +47,15 @@ connection
 app.use("/", categoriesController);
 app.use("/", articlesController);
 app.use("/", usersController);
+
+
+
+// app.use("/session", (req, res) => {
+
+// });
+// app.use("/read", (req, res) => {
+
+// });
 
 app.get("/", (req, res) => {
 
